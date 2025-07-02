@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/javascripts/profile.js"></script>
+  <link rel="stylesheet" href="/stylesheet/profile.css">
+  <title>User Profile</title>
+</head>
+
+<body class="min-h-screen flex items-center justify-center font-sans">
+  <div class="w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl text-white p-10 m-4 border border-white/20">
+    <div class="flex justify-between items-center mb-6">
+      <div class="flex items-center gap-4">
+        <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=<%= user.username %>" alt="Profile" class="w-14 h-14 rounded-full shadow-md border-2 border-white/30" />
+        <div>
+          <h3 class="text-2xl font-bold tracking-wide">Hello, <%= user.username %></h3>
+          <h5 class="text-pink-200 text-sm">You can create a post ✨</h5>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row gap-2 md:gap-4 items-end md:items-center">
+  <a href="/" class="absolute left-4 top-4 md:static px-3 py-1.5 rounded-full bg-purple-600 hover:bg-purple-500 transition font-medium shadow-md text-white text-lg">
+  ←
+</a>
+
+  <a href="/logout" class="px-4 py-2 rounded-full bg-pink-600 hover:bg-pink-500 transition font-medium shadow-md text-center">Logout</a>
+</div>
+
+    </div>
+
+    <form action="/createpost" method="post" class="bg-white/5 p-6 rounded-xl shadow-md border border-white/10">
+      <label for="postContent" class="block text-white mb-2 text-lg font-semibold">📝 Write your post</label>
+      <div class="relative">
+        <textarea
+          id="postContent"
+          name="content"
+          rows="6"
+          placeholder="What's on your mind? 😊"
+          class="w-full p-4 rounded-xl text-zinc-900 focus:outline-none focus:ring-4 focus:ring-pink-400 resize-none shadow-inner"
+          required
+        ></textarea>
+        <div class="absolute right-3 bottom-3 space-x-1">
+          <button type="button" class="emoji-btn text-2xl">😊</button>
+          <button type="button" class="emoji-btn text-2xl">🔥</button>
+          <button type="button" class="emoji-btn text-2xl">🎉</button>
+          <button type="button" class="emoji-btn text-2xl">❤️</button>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="mt-6 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition"
+      >
+        🚀 Submit Post
+      </button>
+    </form>
+
+    <div class="posts mt-20">
+      <h3 class="text-2xl font-extrabold text-white mb-8 flex items-center gap-2">
+        💌 <span class="text-pink-200">Your Lovely Posts</span>
+      </h3>
+
+      <div class="GKJ_post_container grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <% if (user.posts.length === 0) { %>
+          <p class="absolute top-30/38 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-lg opacity-80 text-white/60">
+            😔 No posts available.
+          </p>
+        <% } else { %>
+          <% user.posts.reverse().forEach(function(post){ %>
+            <div id="post-<%= post._id %>" class="post group p-6 rounded-3xl bg-gradient-to-br from-pink-200 via-yellow-100 to-pink-100 shadow-2xl border-2 border-white/30 text-zinc-800 transition transform hover:scale-105 hover:ring-4 hover:ring-pink-300 hover:shadow-pink-300/30 backdrop-blur-md">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-9 h-9 rounded-full bg-pink-300 shadow-inner flex items-center justify-center text-white font-bold text-sm">
+                  <%= user.username.charAt(0).toUpperCase() %>
+                </div>
+                <h4 class="text-pink-600 font-bold text-sm">@<%= user.username %></h4>
+              </div>
+              <p class="text-base leading-relaxed font-medium text-zinc-700">
+                <%= post.content %>
+              </p>
+              <small class="mt-2 inline-block"><%= post.likes.length %> likes</small>
+              <div class="btn flex gap-4 mt-5">
+                <a class="text-blue-500" href="/like/<%= post._id %>">
+                    <%= post.likes.indexOf(user._id) === -1 ? "Like" : "Unlike" %>
+                </a>
+                <a class="text-zinc-500" href="/edit/<%= post._id %>">edit</a>
+                <a href="/delete/<%= post._id %>" class="text-red-400 hover:text-red-200 hover:font-semibold transition duration-200">Delete</a>
+              </div>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+
+      <footer class="text-center mt-10 text-xs opacity-80 text-white/60">
+        © <%= new Date().getFullYear() %> All rights reserved · Created by 
+        <a href="https://gopesh-portfolio-website.onrender.com/" class="underline hover:text-white">Gopesh Kumar Jangid</a>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

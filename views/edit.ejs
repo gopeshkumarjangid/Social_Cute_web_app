@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="/stylesheet/edit.css">
+   <script src="/javascripts/edit.js"></script>
+  <title>Update Post</title>
+
+</head>
+<body class="min-h-screen flex items-center justify-center font-sans text-white">
+
+  <div class="w-full max-w-3xl bg-white/10 backdrop-blur-2xl rounded-3xl shadow-2xl p-10 m-4 border border-white/20">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-4xl font-extrabold tracking-tight">🛠️ Update Post</h2>
+      <a href="/profile" class="text-sm bg-gradient-to-r from-pink-500 to-yellow-400 hover:from-yellow-400 hover:to-pink-400 px-5 py-2 rounded-full font-semibold shadow-md transition">
+        🔙 Back to Profile
+      </a>
+    </div>
+
+    <!-- Update Post Form -->
+    <form action="/updatepost/<%= post._id %>" method="post" class="bg-white/5 p-6 rounded-2xl shadow-inner border border-white/10">
+      <label for="updateContent" class="block mb-3 text-lg font-semibold">✍️ What's new in your post?</label>
+
+      <!-- Textarea & Emoji Buttons -->
+      <div class="relative">
+        <textarea
+          id="updateContent"
+          name="content"
+          rows="6"
+          placeholder="Update your post... 🌈"
+          class="w-full p-4 rounded-2xl text-zinc-900 focus:outline-none focus:ring-4 focus:ring-pink-400 resize-none shadow-md"
+          required
+        ><%= post.content %></textarea>
+
+        <!-- Emoji Buttons -->
+        <div class="absolute right-3 bottom-3 space-x-2">
+          <button type="button" class="emoji-btn text-2xl hover:scale-125 transition">😊</button>
+          <button type="button" class="emoji-btn text-2xl hover:scale-125 transition">🌟</button>
+          <button type="button" class="emoji-btn text-2xl hover:scale-125 transition">💡</button>
+          <button type="button" class="emoji-btn text-2xl hover:scale-125 transition">💕</button>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="mt-8 w-full bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-400 hover:to-pink-400 text-white px-6 py-3 rounded-2xl font-bold text-lg shadow-lg transition"
+      >
+        💾 Save Changes
+      </button>
+    </form>
+
+    <!-- Footer Recognition -->
+    <div class="mt-10 text-center text-xs text-white/60">
+      Created with ❤️ by <span class="underline font-semibold text-pink-200 hover:text-white">Gopesh Kumar Jangid</span>
+    </div>
+  </div>
+
+ 
+</body>
+</html>
