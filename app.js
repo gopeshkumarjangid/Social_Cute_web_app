@@ -14,6 +14,9 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
+require('dotenv').config();
+const PORT = process.env.PORT || 3000;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 
 app.get("/", async (req, res) => {
@@ -122,7 +125,8 @@ app.post('/like/:postId', IsLoggedIn, async (req, res) => {
   }
 
   await post.save();
-res.redirect(`/#post-${req.params.id}`);
+  res.redirect(`/#post-${req.params.postId}`);
+
 
 });
 
