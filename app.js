@@ -1,6 +1,7 @@
-require('dotenv').config(); // ✅ .env load
+require('dotenv').config();// // ✅ .env load
 
 const PORT = process.env.PORT || 3000;
+
 const JWT_SECRET = process.env.JWT_SECRET || "secretkey"; // ✅ .env se JWT_SECRET
 
 const express = require('express');
@@ -28,7 +29,6 @@ app.get("/", async (req, res) => {
   } catch (err) {
     user = null;
   }
-
   res.render("home", {
     allPosts: posts,
     user: user
