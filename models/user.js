@@ -4,11 +4,8 @@ const mongoose = require('mongoose');
 
 
 
-mongoose.connect(process.env.MONGODB_URI, {
-  serverSelectionTimeoutMS: 10000,
-})
-.then(() => console.log("✅ MongoDB Atlas Connected"))
-.catch((err) => console.error("❌ MongoDB connection error:", err));
+mongoose.connect(process.env.MONGODB_URI);
+
 
 
 let userSchema = mongoose.Schema({

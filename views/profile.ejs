@@ -64,7 +64,7 @@
         <% if (user.posts.length === 0) { %>
           <p class="absolute top-30/38 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-lg opacity-80 text-white/60">
             😔 No posts available.
-          </p>
+          </p>      
         <% } else { %>
           <% user.posts.reverse().forEach(function(post){ %>
             <div id="post-<%= post._id %>" class="post group p-6 rounded-3xl bg-gradient-to-br from-pink-200 via-yellow-100 to-pink-100 shadow-2xl border-2 border-white/30 text-zinc-800 transition transform hover:scale-105 hover:ring-4 hover:ring-pink-300 hover:shadow-pink-300/30 backdrop-blur-md">
